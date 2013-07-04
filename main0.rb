@@ -7,6 +7,6 @@ get '/hello/:name' do
 end
 =end
 
-get '/hello/:fname/:lname' do |f, l|
+get '/hello/:fname/?:lname?' do |f, l|
   "hello #{f} #{l}!"
 end
