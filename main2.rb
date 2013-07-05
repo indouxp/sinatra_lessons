@@ -1,8 +1,16 @@
 require 'sinatra'
 require 'sinatra/reloader'
 
-before do
+before '/*' do
   @author = "indou"
+end
+
+after '/about' do
+  logger.info "about page displayed successfully"
+end
+
+after do
+  logger.info "page displayed successfully"
 end
 
 get '/' do

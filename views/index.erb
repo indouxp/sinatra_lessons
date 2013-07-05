@@ -1,1 +1,25 @@
-    <p><%= @contents %></p>
+<% @comments.each do |comment| %>
+<ul>
+  <li data-id="<%= comment.id %>">
+    <%= h comment.body %>
+    <span class="deleteCmd" style="cursor:pointer;color:blue">[x]</span>
+  </li>
+</ul>
+<% end %>
+<h2>Add New</h2>
+<form method="post" action="/new">
+  <input type="text" name="body">
+  <input type="submit" value="post!">
+</form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+<script>
+  $('.deleteCmd').click(function() {
+    var el = $(this).parent();
+    //if (confirm('ほんとに消す?')) {
+      $.post('/delete',
+              {id: el.data('id')},
+              function() {el.fadeOut(0);}
+      )
+    //}
+  })
+</script>
